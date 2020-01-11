@@ -1,6 +1,5 @@
 var cereals = [];
 
-
 function preload() {
 
   inconsolata = loadFont("./assets/Inconsolata.otf")
@@ -34,9 +33,18 @@ function draw() {
   let v = createVector(dx, dy, 0);
   v.div(100);
 
-  ambientLight(244, 164, 96);
-  directionalLight(244, 164, 96, v, v);
-  pointLight(10, 10, 10);
+  if (mouseIsPressed) {
+    ambientLight(160,  82,  45);
+    directionalLight(222, 184, 135, v, v);
+    pointLight(10, 10, 10);
+
+  } else {
+    ambientLight(244, 164, 96);
+    directionalLight(244, 164, 96, v, v);
+    pointLight(10, 10, 10);
+  }
+
+
 
 
   for (var i = 0; i < cereals.length; i++) {
@@ -49,7 +57,7 @@ function draw() {
   textSize(width / 50);
   text("torus cereals", 0, -200);
   textSize(width / 80);
-  text("use the mouse to change light", 0, 200);
+  text("use the mouse to change light + flavour", 0, 200);
 
 
   //bowl + spoon
@@ -85,11 +93,10 @@ function Cereal() {
     rotateY(this.angle / 4);
     rotateZ(this.angle / 3);
     noStroke();
-    ambientMaterial(255, 255, 255);
+    //ambientMaterial(255, 255, 255);
     texture(tex)
     torus(this.diameter, this.diameter / 2);
     pop();
-
 
   };
 
