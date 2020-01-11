@@ -2,11 +2,11 @@ var cereals = [];
 
 function preload() {
 
-  inconsolata = loadFont("./assets/Inconsolata.otf")
-  tex = loadImage("./assets/cereal.jpeg")
+  inconsolata = loadFont("./assets/Inconsolata.otf");
+  tex = loadImage("./assets/cereal.jpeg");
   //3D models
-  bowl = loadModel("./assets/bowl.obj", true)
-  spoon = loadModel("./assets/spoon.obj", true)
+  bowl = loadModel("./assets/bowl.obj", true);
+  spoon = loadModel("./assets/spoon.obj", true);
 
   for (var i = 0; i < 250; i++) {
     cereals.push(new Cereal());
@@ -14,10 +14,10 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(windowWidth, windowHeight, WEBGL)
+  createCanvas(windowWidth, windowHeight, WEBGL);
 
   //i put the text in draw function because otherwise it will be covered by the background
-  textFont(inconsolata)
+  textFont(inconsolata);
   textAlign(CENTER, CENTER);
 
 
@@ -25,7 +25,7 @@ function setup() {
 
 function draw() {
 
-  background(253, 245, 230)
+  background(253, 245, 230);
 
   //create a vector to change light and shadows
   let dx = mouseX - width / 2;
@@ -33,6 +33,7 @@ function draw() {
   let v = createVector(dx, dy, 0);
   v.div(100);
 
+  //change light color
   if (mouseIsPressed) {
     ambientLight(160,  82,  45);
     directionalLight(222, 184, 135, v, v);
@@ -43,8 +44,6 @@ function draw() {
     directionalLight(244, 164, 96, v, v);
     pointLight(10, 10, 10);
   }
-
-
 
 
   for (var i = 0; i < cereals.length; i++) {
@@ -61,14 +60,14 @@ function draw() {
 
 
   //bowl + spoon
-  fill(255)
-  noStroke()
+  fill(255);
+  noStroke();
   scale(1.5);
-  translate(0, 0, -50)
-  model(bowl)
-  translate(80, 0, 90)
-  rotateY(150)
-  model(spoon)
+  translate(0, 0, -50);
+  model(bowl);
+  translate(80, 0, 90);
+  rotateY(150);
+  model(spoon);
 
 }
 
@@ -76,10 +75,10 @@ function Cereal() {
 
   this.x = random(-800, 800);
   this.y = random(-800, 800);
-  this.z = random(-10, 100);
-  this.angle = random(0, 3.14);
+  this.z = random(-10, 100); //in order to not intersect the bowl
+  this.angle = random(0, PI);
   this.diameter = random(5, 20);
-  this.speed = random(0.01, 0.07);
+  this.speed = random(0.03, 0.07);
 
   this.move = function() {
     this.angle += this.speed;
@@ -100,4 +99,8 @@ function Cereal() {
 
   };
 
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
 }
