@@ -1,5 +1,5 @@
 var cereals = [];
-let bg;
+
 
 function preload() {
 
